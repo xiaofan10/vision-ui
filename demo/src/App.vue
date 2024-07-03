@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import BG1 from "./components/BG1.vue";
+import { BG1 } from "vision-design-ui";
+// import BG1 from "@/components/BG1.vue";
 import GetFlatGeometry from "@/utils/GetFlatGeometry";
 import { BufferGeometry, Float32BufferAttribute } from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-
 function VerticesDuplicateRemove(arr) {
   const set = new Set();
   let t = [];
@@ -29,6 +29,7 @@ function VerticesDuplicateRemove(arr) {
 }
 const scaleNum = 600;
 let Q = 0;
+
 const Models = [
   {
     name: "cube",
@@ -119,9 +120,15 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.current = 1;
-    }, 2000);
+    window.xxx = this.$THREE;
+
+    setInterval(() => {
+      if (this.current > 3) {
+        this.current = 0;
+      } else {
+        this.current += 1;
+      }
+    }, 4000);
   },
   methods: {
     handleChange() {
@@ -138,6 +145,5 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  background: #f00;
 }
 </style>

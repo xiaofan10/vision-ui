@@ -232,7 +232,9 @@ class ParticleSystem {
       if (typeof i.path === "string") {
         if (i.loader != null) {
           const { loaderInstance, load } = i.loader;
+          console.log(i.path, "path");
           loaderInstance.load(i.path, (args) => {
+            console.log(args, "load");
             finalGeometry = load(args);
             finishLoad();
           });
@@ -342,7 +344,9 @@ class ParticleSystem {
    * @param {number?} time 动画时间长度，默认 `1500ms`
    */
   ChangeModel(name, time = this.AnimateDuration) {
+    console.log("ChangeModel", name, this.modelList);
     const item = this.modelList.get(name);
+    console.log("ChangeModel", item);
     if (item == null) {
       console.warn(
         "未找到指定名字的模型，改变操作已终止！传入的名字：" + name.toString()
@@ -527,7 +531,7 @@ class ParticleSystem {
   }
   clear() {
     this.scene?.remove(this.AnimateEffectParticle);
-    this.MainParticleGroup = null;
+    this.MainParticleGroup.removeAll();
   }
   destory() {
     // 清除动画针
